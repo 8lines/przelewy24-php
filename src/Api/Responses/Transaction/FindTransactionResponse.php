@@ -4,6 +4,7 @@ namespace Przelewy24\Api\Responses\Transaction;
 
 use Przelewy24\Api\Responses\AbstractResponse;
 use Przelewy24\Enums\Currency;
+use Przelewy24\Enums\TransactionStatus;
 
 class FindTransactionResponse extends AbstractResponse
 {
@@ -17,9 +18,9 @@ class FindTransactionResponse extends AbstractResponse
         return $this->parameters['data']['sessionId'];
     }
 
-    public function status(): int
+    public function status(): TransactionStatus
     {
-        return $this->parameters['data']['status'];
+        return TransactionStatus::from($this->parameters['data']['status']);
     }
 
     public function amount(): int
