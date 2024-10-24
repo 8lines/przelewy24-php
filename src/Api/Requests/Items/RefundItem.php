@@ -9,9 +9,7 @@ class RefundItem
         private readonly string $sessionId,
         private readonly int $amount,
         private readonly ?string $description = null,
-    ) {
-        //
-    }
+    ) {}
 
     public function toArray(): array
     {

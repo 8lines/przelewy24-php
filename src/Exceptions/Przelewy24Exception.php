@@ -9,7 +9,13 @@ class Przelewy24Exception extends BadResponseException
 {
     public static function fromBadResponseException(BadResponseException $exception): static
     {
-        return new static($exception->getMessage(), $exception->getRequest(), $exception->getResponse(), $exception->getPrevious(), $exception->getHandlerContext());
+        return new static(
+            message: $exception->getMessage(),
+            request: $exception->getRequest(),
+            response: $exception->getResponse(),
+            previous: $exception->getPrevious(),
+            handlerContext: $exception->getHandlerContext(),
+        );
     }
 
     public function errorMessage(): array | string | null
