@@ -2,13 +2,15 @@
 
 namespace Przelewy24;
 
+use Przelewy24\Enums\Environment;
+
 class Config
 {
     public function __construct(
         private readonly int $merchantId,
         private readonly string $reportsKey,
         private readonly string $crc,
-        private readonly bool $isLive = false,
+        private readonly Environment $environment = Environment::SANDBOX,
         private readonly ?int $posId = null,
     ) {}
 
@@ -32,8 +34,8 @@ class Config
         return $this->crc;
     }
 
-    public function isLiveMode(): bool
+    public function environment(): Environment
     {
-        return $this->isLive;
+        return $this->environment;
     }
 }

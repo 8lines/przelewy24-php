@@ -6,10 +6,11 @@ use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\RequestOptions;
 use Przelewy24\Config;
+use Przelewy24\Enums\Environment;
 
 class Api
 {
-    private const URL_LIVE = 'https://secure.przelewy24.pl/';
+    private const URL_PRODUCTION = 'https://secure.przelewy24.pl/';
 
     private const URL_SANDBOX = 'https://sandbox.przelewy24.pl/';
 
@@ -39,6 +40,9 @@ class Api
 
     protected function apiUrl(): string
     {
-        return $this->config->isLiveMode() ? self::URL_LIVE : self::URL_SANDBOX;
+        return match ($this->config->environment()) {
+            Environment::PRODUCTION => self::URL_PRODUCTION,
+            Environment::SANDBOX => self::URL_SANDBOX,
+        };
     }
 }

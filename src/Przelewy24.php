@@ -6,6 +6,7 @@ use Przelewy24\Api\Requests\CardRequests;
 use Przelewy24\Api\Requests\PaymentRequests;
 use Przelewy24\Api\Requests\TestRequests;
 use Przelewy24\Api\Requests\TransactionRequests;
+use Przelewy24\Enums\Environment;
 
 class Przelewy24
 {
@@ -15,10 +16,16 @@ class Przelewy24
         int $merchantId,
         string $reportsKey,
         string $crc,
-        bool $isLive = false,
+        Environment $environment = Environment::SANDBOX,
         ?string $posId = null,
     ) {
-        $this->config = new Config($merchantId, $reportsKey, $crc, $isLive, $posId);
+        $this->config = new Config(
+            merchantId: $merchantId,
+            reportsKey: $reportsKey,
+            crc: $crc,
+            environment: $environment,
+            posId: $posId,
+        );
     }
 
     public static function createSignature(array $parameters): string
